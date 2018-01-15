@@ -1,6 +1,7 @@
 #include <fstream>
 #include <climits>
 #include <cmath>
+#include <bitset>
 using namespace std;
 ifstream fin("cifru.in");
 ofstream fout("cifru.out");
@@ -9,7 +10,7 @@ int prime[1230];
 bitset <MAX+1> p;
 int main()
 {
-    int n,i,x,max1=INT_MIN,max2=INT_MIN,cate-0,j,k,r;
+    int n,i,x,max1=INT_MIN,max2=INT_MIN,cate=0,j,k,r,rx,pr1,pr2,nr=INT_MIN;
     fin>>n;
     r=sqrt(MAX);
     p[0]=p[1]=1;
@@ -45,8 +46,24 @@ int main()
         {
             max2=x;
         }
-        while()
+        rx=sqrt(x);
+        if((rx * rx == x) && (x%2==0))
+        {
+            pr1=x/2+1;
+            while(p[pr1]==0)
+            {
+                pr1++;
+            }
+            pr2=x/2-1;
+            while(p[pr2]==0)
+            {
+                pr2--;
+            }
+            if((pr1+pr2==x) && (x>nr))
+            {
+                nr=x;
+            }
+        }
     }
-    fout<<max1<<" "<<max2<<"\n";
-    
+    fout<<max1<<" "<<max2<<"\n"<<nr;
 }
