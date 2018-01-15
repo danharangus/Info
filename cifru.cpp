@@ -14,7 +14,25 @@ int main()
     r=sqrt(MAX);
     p[0]=p[1]=1;
     prime[++cate]=2;
-    
+    for(i=3; i<=r; i+=2)
+    {
+        if(!p[i])
+        {
+            prime[++cate]=i;
+            for(j=i*i; j<=MAX; j+=2*i)
+            {
+                p[j]=i;
+            }
+        }
+    }
+    r+=(r%2==0);
+    for(i=r; i<=MAX; i+=2)
+    {
+        if(p[i]==0)
+        {
+            prime[++cate]=i;
+        }
+    }
     for(i=1; i<=n; i++)
     {
         fin>>x;
@@ -27,6 +45,7 @@ int main()
         {
             max2=x;
         }
+        while()
     }
     fout<<max1<<" "<<max2<<"\n";
     
