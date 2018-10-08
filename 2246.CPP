@@ -52,20 +52,17 @@ bool isAnagram(int poz)
         }
         else if(strchr("+-*", c[i]))
         {
-            for(j = 0; j < 5; j++)
+            if(c[i] == '+')
             {
-                if(c[i] == '+')
-                {
-                    nrp++;
-                }
-                else if(c[i] == '-')
-                {
-                    nrm++;
-                }
-                else if(c[i] == '*')
-                {
-                    nrs++;
-                }
+                nrp++;
+            }
+            else if(c[i] == '-')
+            {
+                nrm++;
+            }
+            else if(c[i] == '*')
+            {
+                nrs++;
             }
         }
         else
@@ -82,7 +79,7 @@ bool isAnagram(int poz)
         }
     }
 
-    if((nrc + nrv + nrs == 5) || (nrc + nrp + nrs >= 2 && nrv + nrm >= 3)  )
+    if((nrc + nrv + nrs == 5) || (nrc + nrp + nrs >= 2 && nrv + nrm + nrs >= 3))
     {
         return true;
     }
