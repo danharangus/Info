@@ -1,0 +1,77 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+
+ifstream fin("perechi.in");
+ifstream finAbs("absenti.txt");
+ofstream fout("variante.out");
+
+
+
+char c, s[256], a;
+
+int  n, x, b[21], f[21];
+
+void backtr(int x, int cnt)
+{
+    for(int i = x; i <= n; i++)
+    {
+        if(f[i])
+        {
+            fout<<"(b"<<x<<" "<<'f'<<i<<')';
+            f[i] = 0;
+
+            for(int j = x + 1; j <= n; j++)
+            {
+                if(b[j])
+                {
+                    b[j] = 0;
+                    backtr(j, cnt + 1);
+                    b[j] = 1;
+                }
+            }
+
+            f[i] = 1;
+        }
+    }
+}
+
+int main()
+{
+    int i, start;
+
+
+    while(fin.getline(s, 256))
+    {
+        n++;
+    }
+
+    while(finAbs>>a>>x)
+    {
+        switch (a)
+        {
+        case 'b':
+            f[x] = 1;
+            break;
+
+        case 'f':
+            b[x] = 1;
+            break;
+
+        }
+    }
+
+    for(i = 1; i <= n; i++)
+    {
+       if(b[i])
+       {
+           start = i;
+           break;
+       }
+    }
+
+    backtr(start, 0);
+
+}
