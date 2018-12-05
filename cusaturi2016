@@ -1,0 +1,73 @@
+#include <iostream>
+#include <fstream>
+
+using namespace std;
+
+ifstream fin("cusaturi.in");
+ofstream fout("cusaturi.out");
+
+int di[8] =  {0, 0, 1, -1, 1, -1, -1, 1}, dj[8] = {1, -1, 0, 0, 1, -1, 1, -1};
+
+int a[105][105];
+
+void FILL(int i, int j, int nou)
+{
+    int nexti, nextj;
+    a[i][j]=nou;
+
+    for(int k=0; k<8; k++)
+    {
+        nexti = i+di[k];
+        nextj = j+dj[k];
+        if(a[nexti][nextj] == 1)
+        {
+            FILL(nexti, nextj, nou);
+        }
+    }
+}
+
+int main()
+{
+    short c;
+    char car;
+    int i,j,n,m;
+
+    fin>>c>>n>>m;
+    for(i=1; i<=n; i++)
+    {
+        for(j=1; j<=m; j++)
+        {
+            fin>>car;
+            a[i][j] = (car=='_'?0:1);
+        }
+    }
+
+    for(i=1; i<=n; i++)
+    {
+        for(j=1; j<=m; j++)
+        {
+            fout<<a[i][j]<<" ";
+        }
+        fout<<endl;
+    }
+    if(c==1)
+    {
+        int cnt = 1;
+        for(i=1; i<=n; i++)
+        {
+            for(j=1; j<=m; j++)
+            {
+                if(a[i][j]==1)
+                {
+                    cnt++;
+                    FILL(i,j,cnt);
+                }
+            }
+        }
+        cout<<cnt-1;
+    }
+    else
+    {
+
+    }
+}
